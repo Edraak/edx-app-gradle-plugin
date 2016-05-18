@@ -7,7 +7,7 @@ class TaskHelper {
     // List of files to load config keys from
     private def getConfigPaths(project) {
         def result = []
-        for(configName in project.edx.activeConfig.configFiles) {
+        for(configName in getConfigFiles(project)) {
             result.add(project.file(project.edx.dir + '/' + configName))
         }
         return result
@@ -53,7 +53,7 @@ class TaskHelper {
         println ""
         println "This command requires uncrustify (http://uncrustify.sourceforge.net)"
         println ""
-        
+
         files.visit { file ->
             if(!file.isDirectory()) {
                 project.exec {
@@ -61,6 +61,19 @@ class TaskHelper {
                     args '-c', '.uncrustify', '--replace', '--no-backup', '-l', 'OC', file.file.path
                 }
             }
+        }
+    }
+
+    def getConfigFiles(project)    {
+        switch (project.edx.env)    {
+            case 1:
+                return project.edx.activeConfig.configFiles
+            case 2:
+                return project.edx.activeConfig.betaConfigFiles
+            case 3:
+                return project.edx.activeConfig.devConfigFiles
+            default:
+                return project.edx.activeConfig.devConfigFiles
         }
     }
 }

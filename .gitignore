@@ -1,1 +1,18 @@
+# Gradle files
+gradle/
+gradlew
+gradlew.bat
+build/
+VideoLocker/gradle.properties
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Other project folders/files
+*.iml
+.idea/
+.DS_Store
+
+# Other files and directories to be ignored
 build
+.idea

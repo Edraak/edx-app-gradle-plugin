@@ -6,6 +6,7 @@ class Configuration {
     static final def IOS = 'IOS'
     static final def ANDROID = 'ANDROID'
     def platform
+    def env
 
     def androidConfig
     def iosConfig
@@ -22,11 +23,11 @@ class Configuration {
         if(androidConfig == null) {
             androidConfig = new AndroidConfiguration();
         }
-        action.delegate = androidConfig 
+        action.delegate = androidConfig
         action()
     }
 
-    def getActiveConfig() {
+    def getActiveConfig()   {
         if(platform.equals(IOS)) {
             return iosConfig
         }
@@ -39,6 +40,8 @@ class Configuration {
 
 class PlatformConfiguration {
     def configFiles = []
+    def betaConfigFiles = []
+    def devConfigFiles = []
 }
 
 class IOSConfiguration extends PlatformConfiguration {
